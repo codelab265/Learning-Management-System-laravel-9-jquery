@@ -12,7 +12,7 @@ This is a Learning Management System (LMS) created using Laravel 9 , jquery and 
 - View log-in trail of every user
 - View logs of every user activity
 
-## For the Teacher User of the System
+## For Teachers side of the System
 
 - The teacher can create his/her Class
 - After creating a class the teacher  View the students for that particular class
@@ -23,7 +23,7 @@ This is a Learning Management System (LMS) created using Laravel 9 , jquery and 
 - Create a class calendar of events 
 - Message co-teacher or students
 
-### Premium Partners
+### For students side of the system
 
 - Sign up for his / her account
 - Can view  classmates in  his / her class
