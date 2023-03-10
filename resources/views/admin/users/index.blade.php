@@ -61,7 +61,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="userEditButton">Save</button>
+                        <button type="button" class="btn btn-primary" id="editSaveButton">Save</button>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
 
     @endsection
     @push('scripts')
-        {{-- <script>
+        <script>
             $(document).ready(function() {
                 var table;
                 loadTable();
@@ -89,7 +89,9 @@
                     }).then((result) => {
                         if (result.value) {
 
-                            var url = "{{ route('admin.users') }}";
+                            var url = "{{ route('admin.users.destroy', ':id') }}";
+                            url = url.replace(':id', id)
+
 
                             var token = "{{ csrf_token() }}";
 
@@ -128,7 +130,7 @@
                         serverSide: true,
                         destroy: true,
                         stateSave: true,
-                        ajax: "{{ route('admin.users') }}",
+                        ajax: "{{ route('admin.users.index') }}",
 
                         columns: [{
                                 data: 'DT_RowIndex',
@@ -163,7 +165,7 @@
                 $('body').on('click', '#userButton', function() {
 
                     $.easyAjax({
-                        url: '{{ route('admin.users') }}',
+                        url: '{{ route('admin.users.store') }}',
                         type: "POST",
                         container: '#userForm',
                         data: $('#userForm').serialize(),
@@ -178,10 +180,13 @@
 
                 })
 
-                $('body').on('click', '#userEditButton', function() {
+                $('body').on('click', '#editSaveButton', function() {
+                    var id = $('#user-id').val();
 
+                    var url = "{{ route('admin.users.update', ':id') }}"
+                    url = url.replace(':id', id);
                     $.easyAjax({
-                        url: '{{ route('admin.users.update') }}',
+                        url: url,
                         type: "PATCH",
                         container: '#userEditForm',
                         data: $('#userEditForm').serialize(),
@@ -212,5 +217,5 @@
 
                 })
             });
-        </script> --}}
+        </script>
     @endpush
