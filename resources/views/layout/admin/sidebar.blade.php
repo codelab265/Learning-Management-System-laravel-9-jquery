@@ -27,6 +27,12 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.users.index') }}" class="nav-link">
+                    <i class="link-icon" data-feather="clipboard"></i>
+                    <span class="link-title">Classes</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.school-year.index') }}" class="nav-link">
                     <i class="link-icon" data-feather="table"></i>
                     <span class="link-title">School Year</span>
                 </a>

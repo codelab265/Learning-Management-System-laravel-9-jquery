@@ -2,7 +2,7 @@
     <div class="card-body">
         {!! Form::open(['id' => 'userEditForm', 'class' => 'ajax-form', 'method' => 'POST']) !!}
         @method('patch')
-        <input type="hidden" name="id" value="{{ $user->id }}" id="user-id">
+        <input type="hidden" name="id" value="{{ $user->id }}">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">

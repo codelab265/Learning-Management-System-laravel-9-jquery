@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SchoolYearController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         return view('admin.dashboard.index');
     });
     Route::resource('users', UserController::class);
+    Route::resource('school-year', SchoolYearController::class);
 });
