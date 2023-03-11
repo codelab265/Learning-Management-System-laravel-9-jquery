@@ -1,5 +1,5 @@
 @extends('layout.admin.app')
-@section('title', 'Users')
+@section('title', 'Classes');
 
 @section('body')
     <div class="page-content">
@@ -17,7 +17,7 @@
                     Create
                 </button>
             </div>
-            @include('admin.users.create')
+            @include('admin.classes.create')
         </div>
 
         <div class="row">
@@ -31,9 +31,6 @@
                                     <tr>
                                         <th></th>
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone Number</th>
-                                        <th>Status</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -46,9 +43,9 @@
             </div>
         </div>
 
-        <div class="modal fade bs-modal-md in" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        <div class="modal fade bs-modal-md in" id="customModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ModalLabel">UPDATE</h5>
@@ -66,7 +63,6 @@
                 </div>
             </div>
         </div>
-
     @endsection
     @push('scripts')
         <script>
@@ -89,7 +85,7 @@
                     }).then((result) => {
                         if (result.value) {
 
-                            var url = "{{ route('admin.users.destroy', ':id') }}";
+                            var url = "{{ route('admin.classes.destroy', ':id') }}";
                             url = url.replace(':id', id)
 
 
@@ -130,7 +126,7 @@
                         serverSide: true,
                         destroy: true,
                         stateSave: true,
-                        ajax: "{{ route('admin.users.index') }}",
+                        ajax: "{{ route('admin.classes.index') }}",
 
                         columns: [{
                                 data: 'DT_RowIndex',
@@ -141,18 +137,6 @@
                                 data: 'name',
                                 name: 'name'
                             },
-                            {
-                                data: 'email',
-                                name: 'email'
-                            },
-                            {
-                                data: 'phone_number',
-                                name: 'phone_number'
-                            },
-                            {
-                                data: 'is_active',
-                                name: 'is_active'
-                            },
 
                             {
                                 data: 'action',
@@ -162,17 +146,17 @@
                     });
                 }
 
-                $('body').on('click', '#userButton', function() {
+                $('body').on('click', '#createSaveButton', function() {
 
                     $.easyAjax({
-                        url: '{{ route('admin.users.store') }}',
+                        url: '{{ route('admin.classes.store') }}',
                         type: "POST",
-                        container: '#userForm',
-                        data: $('#userForm').serialize(),
+                        container: '#createForm',
+                        data: $('#createForm').serialize(),
                         success: function(response) {
                             if (response.status == 'success') {
                                 loadTable();
-                                $('#userForm')[0].reset();
+                                $('#createForm')[0].reset();
                             }
                         }
                     })
@@ -181,25 +165,22 @@
                 })
 
                 $('body').on('click', '#editSaveButton', function() {
-                    var id = $('#user-id').val();
+                    var id = $('#class-id').val();
 
-                    var url = "{{ route('admin.users.update', ':id') }}"
+                    var url = "{{ route('admin.classes.update', ':id') }}"
                     url = url.replace(':id', id);
                     $.easyAjax({
                         url: url,
                         type: "PATCH",
-                        container: '#userEditForm',
-                        data: $('#userEditForm').serialize(),
+                        container: '#editForm',
+                        data: $('#editForm').serialize(),
                         success: function(response) {
                             if (response.status == "success") {
                                 $.unblockUI();
                                 table._fnDraw();
-                                $('#userModal').modal('hide')
+                                $('#customModal').modal('hide')
                             }
-                            // if (response.status == 'success') {
-                            //     loadTable();
 
-                            // }
                         }
                     })
 
@@ -209,11 +190,10 @@
 
                 $('body').on('click', '.editButton', function() {
 
-                    var userId = $(this).data('id');
-                    var url = '{{ route('admin.users.edit', ':id') }}';
-                    url = url.replace(':id', userId);
-                    $('#ModalLabel').html("EDIT USER");
-                    $.ajaxModal('#userModal', url);
+                    var classId = $(this).data('id');
+                    var url = '{{ route('admin.classes.edit', ':id') }}';
+                    url = url.replace(':id', classId);
+                    $.ajaxModal('#customModal', url);
 
                 })
             });

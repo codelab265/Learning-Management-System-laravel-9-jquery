@@ -49,7 +49,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel">CREATE</h5>
+                        <h5 class="modal-title" id="ModalLabel">UPDATE</h5>
                         <button type="button" class="btn text-danger" data-bs-dismiss="modal" aria-label="btn-close">
                             <i data-feather="x-circle"></i>
                         </button>
